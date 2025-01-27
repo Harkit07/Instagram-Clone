@@ -1,0 +1,29 @@
+/* Footer Styles */
+.instagram-footer {
+  padding: 20px 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #000;
+}
+
+.footer-text {
+  color: #aaa;
+  font-size: 12px;
+}

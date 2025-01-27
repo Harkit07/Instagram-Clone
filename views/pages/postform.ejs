@@ -1,0 +1,160 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/postForm.css" />
+<div class="upload-container">
+  <form action="/home/posts/new" method="POST" enctype="multipart/form-data">
+    <h1>Create a Post</h1>
+    <!-- Image upload -->
+    <label class="upload-label" for="file-input">Upload Post</label>
+    <input
+      type="file"
+      id="file-input"
+      class="file-input"
+      accept="image/*,video/*"
+      name="post[file]"
+    />
+    <div id="preview-container">
+      <!-- Image preview -->
+      <img id="image-preview" alt="Image Preview" style="display: none" />
+
+      <!-- Video preview -->
+      <video id="video-preview" controls style="display: none"></video>
+    </div>
+    <textarea name="post[caption]" placeholder="Write a caption..."></textarea>
+    <div class="file-location form-input">
+      <input
+        name="post[location]"
+        type="text"
+        id="location"
+        placeholder="Add location"
+      />
+      <label for="location" class="form-sign"
+        ><i class="fa-solid fa-location-dot"></i
+      ></label>
+    </div>
+    <div class="file-collaboration form-input">
+      <input
+        name="post[collaboration]"
+        type="text"
+        id="collaboration"
+        placeholder="Add collaborators"
+      />
+      <label for="collaboration" class="form-sign"
+        ><i class="fa-solid fa-user-plus"></i
+      ></label>
+    </div>
+    <div class="accessibility form-input">
+      <span><b>Accessibility</b></span>
+      <span class="form-sign"
+        ><i class="fa-solid fa-chevron-down accCurser"></i
+      ></span>
+    </div>
+    <div class="acc-text form-content hide">
+      <span class="acc-text-inside text-left">
+        <p>
+          Alt text describes your photos for people with visual impairments. Alt
+          text will be automatically created for your photos or you can choose
+          to write your own.
+        </p>
+      </span>
+      <span class="acc-text-inside">
+        <input type="text" id="accessibility" placeholder="Write alt text..." />
+      </span>
+    </div>
+    <div class="advanced-settings form-input">
+      <span><b>Advanced&nbsp;settings</b></span>
+      <span class="form-sign"
+        ><i class="fa-solid fa-chevron-down advCurser"></i
+      ></span>
+    </div>
+    <div class="adv-more hide">
+      <div class="adv-set-text form-content">
+        <div class="adv-text">
+          <span class="text-left">
+            Hide like and view counts on this post
+          </span>
+          <div class="toggle-switch">
+            <input type="checkbox" id="toggle" class="toggle-input" />
+            <label for="toggle" class="toggle-label"></label>
+          </div>
+        </div>
+        <span class="acc-text-inside text-left">
+          <p>
+            Only you will see the total number of likes and views on this post.
+            You can change this later by going to the ... menu at the top of the
+            post.<a href="#">Learn more</a>
+          </p>
+        </span>
+      </div>
+      <div class="adv-set-text form-content">
+        <div class="adv-text">
+          <span class="text-left"> Turn off commenting </span>
+          <div class="toggle-switch">
+            <input type="checkbox" id="toggle" class="toggle-input" />
+            <label for="toggle" class="toggle-label"></label>
+          </div>
+        </div>
+        <span class="acc-text-inside text-left">
+          <p>
+            You can change this later by going to the ... menu at the top of
+            your post.
+          </p>
+        </span>
+      </div>
+    </div>
+    <button>Post</button>
+  </form>
+</div>
+
+<script>
+  const fileInput = document.getElementById("file-input");
+  const previewContainer = document.getElementById("preview-container");
+  const imagePreview = document.getElementById("image-preview");
+  const videoPreview = document.getElementById("video-preview");
+
+  // Handle file selection
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const fileURL = URL.createObjectURL(file);
+      previewContainer.style.display = "block";
+
+      // Check if the file is an image
+      if (file.type.startsWith("image/")) {
+        imagePreview.src = fileURL;
+        imagePreview.style.display = "block";
+        videoPreview.style.display = "none";
+      }
+      // Check if the file is a video
+      else if (file.type.startsWith("video/")) {
+        videoPreview.src = fileURL;
+        videoPreview.style.display = "block";
+        imagePreview.style.display = "none";
+      } else {
+        alert("Please upload a valid image or video.");
+        previewContainer.style.display = "none";
+      }
+    } else {
+      previewContainer.style.display = "none";
+    }
+  });
+
+  function toogleTwoClass(set, more, cursor) {
+    set.addEventListener("click", async () => {
+      await more.classList.toggle("hide");
+      await cursor.classList.toggle("rotate180");
+    });
+  }
+
+  const advMore = document.querySelector(".adv-more");
+  const advSetting = document.querySelector(".advanced-settings");
+  const advCurser = document.querySelector(".advCurser");
+
+  toogleTwoClass(advSetting, advMore, advCurser);
+
+  const accMore = document.querySelector(".acc-text");
+  const accSetting = document.querySelector(".accessibility");
+  const accCurser = document.querySelector(".accCurser");
+
+  toogleTwoClass(accSetting, accMore, accCurser);
+</script>

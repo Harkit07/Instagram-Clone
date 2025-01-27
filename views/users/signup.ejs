@@ -1,0 +1,66 @@
+<% layout("/layouts/login") %>
+<div class="signup-container">
+  <div class="signup-box">
+    <h1 class="logo">Instagram</h1>
+    <p class="intro-text">
+      Sign up to see photos and videos from your friends.
+    </p>
+    <button class="facebook-login">Log in with Facebook</button>
+    <div class="divider">OR</div>
+    <form class="signup-form" method="post" action="/insta/signup">
+      <input
+        type="text"
+        placeholder="Mobile Number or Email"
+        name="id"
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        name="password"
+        required
+      />
+      <input
+        type="text"
+        placeholder="Full Name"
+        name="fullname"
+        required
+      />
+      <input
+        type="text"
+        placeholder="Username"
+        name="username"
+        required
+      />
+      <p class="terms">
+        People who use our service may have uploaded your contact information to
+        Instagram. <a href="#">Learn More</a>.
+      </p>
+      <p class="terms">
+        By signing up, you agree to our <a href="#">Terms</a>,
+        <a href="#">Privacy Policy</a>, and <a href="#">Cookies Policy</a>.
+      </p>
+      <button type="submit" class="signup-button">Sign up</button>
+    </form>
+  </div>
+
+  <div class="login-box">
+    <p>Have an account? <a href="/insta/login">Log in</a></p>
+  </div>
+
+  <div class="get-app">
+    <p>Get the app.</p>
+    <div class="store-buttons">
+      <a href="#"
+        ><img
+          src="https://static.cdninstagram.com/rsrc.php/v4/yz/r/c5Rp7Ym-Klz.png"
+          alt="Get it on Google Play"
+      /></a>
+      <a href="#"
+        ><img
+          src="https://static.cdninstagram.com/rsrc.php/v4/yu/r/EHY6QnZYdNX.png"
+          alt="Get it from Microsoft"
+      /></a>
+    </div>
+  </div>
+</div>

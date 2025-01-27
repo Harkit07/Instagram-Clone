@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/followers.css" />
+<div class="following-container hide">
+  <div class="main-container">
+    <div class="popup-header">
+      <h3>Following</h3>
+      <button class="close-btn">&times;</button>
+    </div>
+    <div class="follow-search-bar">
+      <input type="text" id="search" placeholder="Search" />
+    </div>
+    <ul class="followers-list">
+      <% if(user.following) { %> <% for(let followings of user.following) {%>
+      <li>
+        <div class="follower-info">
+          <img src="<%= followings.profilePic.url %>" alt="Profile Picture" />
+          <span class="name"><%= followings.username %></span>
+        </div>
+        <button class="remove-btn">following</button>
+      </li>
+      <% } %> <% } else { %>
+      <li>No Following Yet</li>
+      <% } %>
+    </ul>
+  </div>
+</div>

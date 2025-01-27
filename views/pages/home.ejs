@@ -1,0 +1,235 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/home.css" />
+<div class="middle-section">
+  <div class="post-section">
+    <!-- <div class="nav-hidden">
+      <div class="nav-hidden-logo" id="white-2color">
+        <img
+          decoding="async"
+          src="https://i.postimg.cc/qMFTcDw1/instagram-text.png"
+          alt=""
+        />
+      </div>
+      <div class="nav-hide-2">
+        <i class="fa-regular fa-heart"></i>
+        <i class="fa-regular fa-paper-plane"></i>
+      </div>
+    </div> -->
+    <div class="story-container">
+      <button class="nav-button" id="scroll-left">&lt;</button>
+      <div class="story-section" id="story-section">
+        <div class="story">
+          <div class="story-image">
+            <img
+              decoding="async"
+              src="<%= currUser.profilePic.url %>"
+              alt="Profile Pic"
+            />
+          </div>
+          <span><%= currUser.username %></span>
+        </div>
+        <% for(let user of allUsers) { %> <% if(user._id.equals(currUser._id) )
+        {%> <% } else{%>
+        <div class="story">
+          <div class="story-image">
+            <img
+              decoding="async"
+              src="<%= user.profilePic.url %>"
+              alt="Image"
+            />
+          </div>
+          <span><%= user.username %></span>
+        </div>
+        <% } %> <% } %>
+      </div>
+      <button class="nav-button" id="scroll-right">&gt;</button>
+    </div>
+    <div class="post-area">
+      <% for(let post of allPosts) { %>
+      <div class="post-main">
+        <div class="post-header">
+          <a href="/profile/<%= post.username._id %>/posts">
+            <div class="post-left-header">
+              <div class="post-image">
+                <img
+                  decoding="async"
+                  src="<%= post.username.profilePic.url %>"
+                  alt="Image"
+                />
+              </div>
+              <p class="post-username"><%= post.username.username %></p>
+              <i class="fa-solid fa-certificate"></i>
+              <span class="one-day"> . 1h </span>
+            </div>
+          </a>
+          <%if(post.username._id.equals(currUser._id)) {} else
+          if(post.username.followers.length === 0) {%>
+          <a href="/home/<%= post.username._id %>/follow" class="post-follow">
+            Follow
+          </a>
+          <%} else { let inFollowers = true; for(follower of
+          post.username.followers) { if(follower._id.equals(currUser._id)){
+          inFollowers=false; break; }else{ inFollowers=true; }}
+          if(inFollowers){%>
+          <a href="/home/<%= post.username._id %>/follow" class="post-follow"
+            >Follow</a
+          >
+          <% } }%>
+          <i class="fa-solid fa-grip-lines info"></i>
+          <%- include("../includes/infoPopup.ejs") %>
+        </div>
+        <div class="post-main-image">
+          <% if(post.file.url.includes("/video")) { %>
+          <video class="media" loop controls>
+            <source src="<%= post.file.url %>" type="video/mp4" />
+          </video>
+          <% } else{ %>
+          <img decoding="async" src="<%= post.file.url %>" alt="IMAGE" />
+          <% }%>
+        </div>
+        <div class="post-fotter">
+          <div class="post-fotter-left">
+            <i class="fa-regular fa-heart like"></i>
+            <a href="/home/<%= post._id %>/comment">
+              <i class="fa-regular fa-message msg"></i>
+            </a>
+            <i class="fa-regular fa-paper-plane"></i>
+          </div>
+          <a href="#">
+            <i class="fa-regular fa-bookmark"></i>
+          </a>
+        </div>
+        <div class="post-description">
+          <p class="post-liked">Liked by sarasshree and others</p>
+          <p class="title">
+            <span><%= post.location %></span><%= post.caption %><br />
+            more
+          </p>
+          <a href="/home/<%= post._id %>/comment">
+            <p class="comments">view all comments</p>
+          </a>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<!-- SUGGESTION SECTION -->
+<div class="follow-section">
+  <div class="profile-follow profile-foolow-hovering">
+    <div class="profile-follow-left">
+      <div class="profile-follow-image">
+        <img
+          decoding="async"
+          src="<%= currUser.profilePic.url %>"
+          alt="Profile Pic"
+        />
+      </div>
+      <div class="profile-follow-content">
+        <p class="profile-id"><%= currUser.username %></p>
+        <p class="profile-name"><%= currUser.fullname %></p>
+      </div>
+    </div>
+    <a href="#" class="follow">switch</a>
+  </div>
+  <div class="suggestion-follow">
+    <p class="suggestion">Suggested for you</p>
+    <a href="#" class="see-all">see all</a>
+  </div>
+  <% for(let user of allUsers) { %> <%if(user._id.equals(currUser._id)) {} else
+  if(user.followers.length === 0) {%>
+  <div class="profile-follow profile-foolow-hovering">
+    <div class="profile-follow-left">
+      <div class="profile-follow-image">
+        <img decoding="async" src="<%= user.profilePic.url %>" alt="Image" />
+      </div>
+      <div class="profile-follow-content">
+        <p class="profile-id"><%= user.username %></p>
+        <p class="profile-name">Followed by shiv_s177</p>
+      </div>
+    </div>
+    <a href="/home/<%= user._id %>/follow" class="follow">follow</a>
+  </div>
+  <%} else { let inFollowers = true; for(follower of user.followers) {
+  if(follower._id.equals(currUser._id)){ inFollowers=false; break; }else{
+  inFollowers=true; }} if(inFollowers){%>
+  <div class="profile-follow profile-foolow-hovering">
+    <div class="profile-follow-left">
+      <div class="profile-follow-image">
+        <img decoding="async" src="<%= user.profilePic.url %>" alt="Image" />
+      </div>
+      <div class="profile-follow-content">
+        <p class="profile-id"><%= user.username %></p>
+        <p class="profile-name">Followed by shiv_s177</p>
+      </div>
+    </div>
+    <a href="/home/<%= user._id %>/follow" class="follow">follow</a>
+  </div>
+  <% } }%><%}%>
+  <div class="profile-follow profile-foolow-hovering">
+    <div class="profile-follow-left">
+      <div class="profile-follow-image">
+        <img
+          decoding="async"
+          src="https://cdn.pixabay.com/photo/2022/09/08/15/16/cute-7441224_640.jpg"
+          alt=""
+        />
+      </div>
+      <div class="profile-follow-content">
+        <p class="profile-id">ubey_lih</p>
+        <p class="profile-name">Followed by shriiiiii_89_ + 2 more</p>
+      </div>
+    </div>
+    <a href="#" class="follow">follow</a>
+  </div>
+  <div class="profile-follow profile-foolow-hovering">
+    <div class="profile-follow-left">
+      <div class="profile-follow-image">
+        <img
+          decoding="async"
+          src="https://cdn.pixabay.com/photo/2020/08/02/18/08/woman-5458225_640.png"
+          alt=""
+        />
+      </div>
+      <div class="profile-follow-content">
+        <p class="profile-id">limsean_awersom</p>
+        <p class="profile-name">Followed by ajeetyadav8242 +....</p>
+      </div>
+    </div>
+    <a href="#" class="follow">follow</a>
+  </div>
+  <div class="profile-follow profile-foolow-hovering">
+    <div class="profile-follow-left">
+      <div class="profile-follow-image">
+        <img
+          decoding="async"
+          src="https://cdn.pixabay.com/photo/2021/07/19/04/36/woman-6477171_640.jpg"
+          alt=""
+        />
+      </div>
+      <div class="profile-follow-content">
+        <p class="profile-id">rootpies567t</p>
+        <p class="profile-name">Followed by ravish_thakur31</p>
+      </div>
+    </div>
+    <a href="#" class="follow">follow</a>
+  </div>
+  <div class="profile-follow profile-foolow-hovering">
+    <div class="profile-follow-left">
+      <div class="profile-follow-image">
+        <img
+          decoding="async"
+          src="https://cdn.pixabay.com/photo/2019/11/01/06/11/profile-4593404_640.jpg"
+          alt=""
+        />
+      </div>
+      <div class="profile-follow-content">
+        <p class="profile-id">michal_kuu</p>
+        <p class="profile-name">New to Instagram</p>
+      </div>
+    </div>
+    <a href="#" class="follow">follow</a>
+  </div>
+  <%- include("../includes/footer.ejs") %>
+</div>

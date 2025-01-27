@@ -1,0 +1,85 @@
+<% layout("/layouts/profile") %>
+<!-- Navigation Tabs -->
+<!-- Profile Header -->
+<header class="profile-header">
+  <div class="profile-avatar">
+    <% if(user.profilePic.url) {%>
+    <img src="<%= user.profilePic.url %>" alt="Profile Picture" />
+    <% } else {%>
+    <img
+      src="https://www.shutterstock.com/image-vector/avatar-gender-neutral-silhouette-vector-260nw-2470054311.jpg"
+      alt="Profile Picture"
+    />
+    <% } %>
+  </div>
+  <div class="profile-info">
+    <div class="profile-top">
+      <h2 class="username"><%= user.username %></h2>
+      <% if(user._id.equals(currUser._id)) {%>
+      <button class="edit-profile-btn">
+        <a href="/profile/<%= user._id %>/edit">Edit profile</a>
+      </button>
+      <button class="view-archive-btn">View archive</button>
+      <span class="settings-icon"><i class="fa-solid fa-gear"></i></span>
+      <% } %>
+    </div>
+    <div class="profile-stats">
+      <div><strong><%= user.posts.length %></strong> posts</div>
+      <div class="followers">
+        <strong><%= user.followers.length %></strong> followers
+      </div>
+      <div class="following">
+        <strong><%= user.following.length %></strong> following
+      </div>
+    </div>
+    <p><%= user.fullname %></p>
+    <% if(user.bio) { %>
+    <p class="profile-name"><%= user.bio %></p>
+    <% } %>
+  </div>
+</header>
+
+<!-- Highlights -->
+<div class="profile-highlights">
+  <div class="highlight">
+    <img src="https://via.placeholder.com/80" alt="Highlight 1" />
+    <p>nagar kirtan...</p>
+  </div>
+  <div class="highlight">
+    <div class="new-highlight">+</div>
+    <p>New</p>
+  </div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="profile-tabs">
+  <a href="/profile/<%= user._id %>/posts" class="active"
+    ><i class="fa-solid fa-table-cells"></i>&nbsp;Posts</a
+  >
+  <a href="/profile/<%= user._id %>/reels"
+    ><i class="fa-solid fa-clapperboard"></i>&nbsp;Reels</a
+  >
+  <% if(user._id.equals(currUser._id)) {%>
+  <a href="/profile/<%= currUser._id %>/saved">
+    <i class="fa-regular fa-bookmark"></i>&nbsp;Saved</a
+  >
+  <% } %>
+  <a href="/profile/<%= user._id %>/tagged">
+    <i class="fa-solid fa-user-tag"></i>&nbsp;Tagged</a
+  >
+</nav>
+<!-- Seaction  -->
+<section class="profile-posts">
+  <% for(let post of user.posts) { %>
+  <div class="post">
+    <a href="/home/<%= post._id %>/comment">
+      <% if(post.file.url.includes("/video")) { %>
+      <video class="media" loop controls>
+        <source src="<%= post.file.url %>" type="video/mp4" />
+      </video>
+      <% } else{ %>
+      <img decoding="async" src="<%= post.file.url %>" alt="IMAGE" />
+      <% }%>
+    </a>
+  </div>
+  <% } %>
+</section>

@@ -1,0 +1,44 @@
+<% layout("/layouts/login") %>
+<div class="login-container">
+  <div class="login-box">
+    <h1 class="logo">Instagram</h1>
+    <form class="login-form" method="post" action="/insta/login">
+      <input
+        type="text"
+        placeholder="Username"
+        name="username"
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        name="password"
+        required
+      />
+      <button type="submit">Log in</button>
+      <div class="divider">OR</div>
+      <button class="facebook-login">Log in with Facebook</button>
+      <a href="#" class="forgot-password">Forgot password?</a>
+    </form>
+  </div>
+
+  <div class="signup-box">
+    <p>Don't have an account? <a href="/insta/signup">Sign up</a></p>
+  </div>
+
+  <div class="get-app">
+    <p>Get the app.</p>
+    <div class="store-buttons">
+      <a href="#"
+        ><img
+          src="https://static.cdninstagram.com/rsrc.php/v4/yz/r/c5Rp7Ym-Klz.png"
+          alt="Get it on Google Play"
+      /></a>
+      <a href="#"
+        ><img
+          src="https://static.cdninstagram.com/rsrc.php/v4/yu/r/EHY6QnZYdNX.png"
+          alt="Get it from Microsoft"
+      /></a>
+    </div>
+  </div>
+</div>

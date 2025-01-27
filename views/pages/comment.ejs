@@ -1,0 +1,60 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/comment.css" />
+<div class="comment-post-box">
+  <div class="post-main-image">
+    <% if(post.file.url.includes("/video")) { %>
+    <video class="media" loop controls>
+      <source src="<%= post.file.url %>" type="video/mp4" />
+    </video>
+    <% } else{ %>
+    <img decoding="async" src="<%= post.file.url %>" alt="IMAGE" />
+    <% }%>
+  </div>
+  <div class="comment-page">
+    <!-- Header -->
+    <header class="header">
+      <h1>Comments</h1>
+    </header>
+    <% if(post.comments.length > 0) {%>
+    <!-- Comments Section -->
+    <section class="comments-section">
+      <!-- Comment -->
+      <% for(let comment of post.comments) { %>
+      <div class="comment">
+        <img
+          src="<%= comment.author.profilePic.url %>"
+          alt="User Avatar"
+          class="avatar"
+        />
+        <div class="comment-content">
+          <div class="about-comment">
+            <span class="author">
+              <strong><%= comment.author.username %></strong>
+            </span>
+            <p><%= comment.about %></p>
+          </div>
+          <span class="timestamp">5:00am</span>
+        </div>
+      </div>
+      <% } %>
+    </section>
+    <% } %>
+    <!-- Add Comment Section -->
+    <form action="/home/<%= post._id %>/comment" method="post">
+      <footer class="comment-input-section">
+        <img
+          src="<%= currUser.profilePic.url %>"
+          alt="Your Avatar"
+          class="avatar"
+        />
+        <input
+          type="text"
+          placeholder="Add a comment..."
+          class="comment-input"
+          name="comment[about]"
+        />
+        <button class="post-btn">Post</button>
+      </footer>
+    </form>
+  </div>
+</div>

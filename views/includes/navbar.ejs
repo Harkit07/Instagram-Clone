@@ -1,0 +1,136 @@
+<link rel="stylesheet" href="/css/navbar.css" />
+<nav>
+  <div class="navbar">
+    <div class="instagram-text-logo">
+      <img
+        src="https://i.postimg.cc/qMFTcDw1/instagram-text.png"
+        id="white-color"
+        alt="INSTAGRAM"
+      />
+    </div>
+    <a href="/home">
+      <div class="sub-section">
+        <i class="fa-solid fa-house"></i>
+        <p>Home</p>
+      </div>
+    </a>
+    <%- include("../includes/searchPopup.ejs") %>
+    <a href="#">
+      <div class="sub-section searchBtn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <p>Search</p>
+      </div>
+    </a>
+    <a href="#">
+      <div class="sub-section">
+        <i class="fa-regular fa-compass"></i>
+        <p>Explore</p>
+      </div>
+    </a>
+    <a href="#">
+      <div class="sub-section">
+        <i class="fa-solid fa-clapperboard"></i>
+        <p>Reels</p>
+      </div>
+    </a>
+    <a href="/message">
+      <div class="sub-section">
+        <i class="fa-regular fa-message"></i>
+        <p>Messages</p>
+      </div>
+    </a>
+    <a href="#">
+      <div class="sub-section" id="hidden2">
+        <i class="fa-regular fa-heart"></i>
+        <p>Notifications</p>
+      </div>
+    </a>
+    <%- include("../includes/create.ejs") %>
+    <a href="#">
+      <div class="sub-section createBtn" id="hidden1">
+        <i class="fa-solid fa-square-plus"></i>
+        <p>Create</p>
+      </div>
+    </a>
+    <a href="/profile/<%= currUser._id %>/posts">
+      <div class="sub-section">
+        <div class="profile-img">
+          <img
+            decoding="async"
+            src="<%= currUser.profilePic.url %>"
+            alt="Profile Pic"
+          />
+        </div>
+        <p>Profile</p>
+      </div>
+    </a>
+    <a
+      href="https://aistudio.instagram.com/?utm_source=ig_web_nav&hl=en"
+      target="_blank"
+    >
+      <div class="sub-section" id="hidden1">
+        <i class="fa-solid fa-table-cells-large"></i>
+        <p>AI Studio</p>
+      </div>
+    </a>
+    <a
+      href="https://www.threads.net/?xmt=AQGzKjcIwx-8g-iY0uszTJvKK2KGYlJDUd5Rn37nyaefZC4&hl=en"
+      target="_blank"
+    >
+      <div class="sub-section" id="hidden1">
+        <i class="fa-solid fa-at"></i>
+        <p>Explore</p>
+      </div>
+    </a>
+    <%- include("../includes/popup.ejs") %>
+    <a href="#">
+      <div class="sub-section more" id="hidden1">
+        <i class="fa-solid fa-bars"></i>
+        <p>More</p>
+      </div>
+    </a>
+  </div>
+</nav>
+<script>
+  function removeHide(btn, div) {
+    btn.addEventListener("click", () => {
+      div.classList.remove("hide");
+    });
+  }
+
+  function addHide(div) {
+    div.addEventListener("click", () => {
+      div.classList.add("hide");
+    });
+  }
+
+  function stopPropagation(div) {
+    div.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  }
+
+  const moreBtn = document.querySelector(".more");
+  const popup = document.querySelector(".more-popup");
+  const moreContainer = document.querySelector(".more-container");
+
+  removeHide(moreBtn, moreContainer);
+  stopPropagation(popup);
+  addHide(moreContainer);
+
+  const popupContainer = document.querySelector(".popup-container");
+  const searchBtn = document.querySelector(".searchBtn");
+  const searchPopup = document.querySelector(".search-popup");
+
+  removeHide(searchBtn, popupContainer);
+  stopPropagation(searchPopup);
+  addHide(popupContainer);
+
+  const createContainer = document.querySelector(".create-container");
+  const createPopup = document.querySelector(".popup");
+  const createBtn = document.querySelector(".createBtn");
+
+  removeHide(createBtn, createContainer);
+  stopPropagation(createPopup);
+  addHide(createContainer);
+</script>

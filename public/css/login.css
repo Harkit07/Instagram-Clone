@@ -1,0 +1,145 @@
+/* General Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+a {
+  color: #0095f6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Login Container */
+.login-container {
+  text-align: center;
+}
+
+.login-box {
+  background-color: #111;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.logo {
+  font-family: "Billabong", cursive;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.login-form input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #333;
+  background-color: #222;
+  color: #fff;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  background-color: #0095f6;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #007dc3;
+}
+
+.divider {
+  margin: 20px 0;
+  color: #888;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 40%;
+  top: 50%;
+  background-color: #333;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.facebook-login {
+  background-color: #4267b2;
+  margin-top: 10px;
+}
+
+.forgot-password {
+  display: block;
+  margin-top: 15px;
+}
+
+.signup-box {
+  background-color: #111;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  width: 320px;
+}
+
+.get-app {
+  margin-top: 20px;
+}
+
+.get-app p {
+  margin-bottom: 10px;
+}
+
+.store-buttons img {
+  width: 120px;
+  margin: 5px;
+}
+
+.footer {
+  margin-top: 20px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer ul li {
+  margin: 0;
+}
+
+.footer p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}

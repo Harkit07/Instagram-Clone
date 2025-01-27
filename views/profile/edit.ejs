@@ -1,0 +1,99 @@
+<% layout("/layouts/profile") %>
+<link rel="stylesheet" href="/css/edit.css" />
+<div class="container">
+  <form
+    id="editProfileForm"
+    method="post"
+    action="/profile/<%= user._id %>/edit"
+    enctype="multipart/form-data"
+  >
+    <h1>Edit Profile</h1>
+    <div class="profile-pic-container">
+      <% if(user.profilePic.url) {%>
+      <img
+        src="<%= user.profilePic.url %>"
+        alt="Profile Picture"
+        class="profile-pic"
+        id="profilePreview"
+      />
+      <% } else { %>
+      <img
+        src="https://www.shutterstock.com/image-vector/avatar-gender-neutral-silhouette-vector-260nw-2470054311.jpg"
+        alt="Profile Picture"
+        class="profile-pic"
+        id="profilePreview"
+      />
+      <% } %>
+      <br />
+      <label class="upload-label" for="profilePic">Change Profile Photo</label>
+      <input
+        type="file"
+        id="profilePic"
+        name="user[profilePic]"
+        accept="image/*"
+        onchange="previewImage(event)"
+      />
+    </div>
+    <div class="form-group">
+      <label for="fullName">Name</label>
+      <input
+        type="text"
+        id="fullName"
+        name="user[fullName]"
+        placeholder="Full Name"
+        value="<%= user.fullname %>"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="user[username]"
+        value="<%= user.username %>"
+        placeholder="Username"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <div class="gender">
+        <label>
+          <input
+            type="radio"
+            name="user[gender]"
+            value="male"
+            checked
+            required
+          />Male
+        </label>
+        <label style="margin-left: 20px">
+          <input type="radio" name="user[gender]" value="female" />Female
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="bio">Bio</label>
+      <textarea id="bio" name="user[bio]" <% if(user.bio) {%>
+        value="<%= user.bio %>"
+        <% } else {%>
+        placeholder="Tell us about yourself"
+        <% } %>
+      ></textarea
+      >
+    </div>
+    <button type="submit">Save Changes</button>
+  </form>
+</div>
+
+<script>
+  function previewImage(event) {
+    const preview = document.getElementById("profilePreview");
+    const file = event.target.files[0];
+    if (file) {
+      preview.src = URL.createObjectURL(file);
+      preview.onload = () => URL.revokeObjectURL(preview.src);
+    }
+  }
+</script>
